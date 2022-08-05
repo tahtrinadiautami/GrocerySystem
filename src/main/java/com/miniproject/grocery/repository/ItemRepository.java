@@ -16,27 +16,30 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<GroceryItem, Integer> {
 
     @Modifying
-    @Query(value = "INSERT INTO gs.grocery_item(item_name,price,store,stock,last_purchase,last_updated) " +
-            "VALUES(:item_name,:price,:store,:stock,CAST(:last_purchase AS timestamp),current_timestamp)", nativeQuery = true)
+    @Query(value = "INSERT INTO gs.grocery_item(item_name,item_type,price,store,stock,last_purchase,last_updated) " +
+            "VALUES(:item_name,:item_type,:price,:store,:stock,CAST(:last_purchase AS timestamp),current_timestamp)", nativeQuery = true)
     void addItem(@Param("item_name") String item_name,
+                 @Param("item_type") String item_type,
                  @Param("price") int price,
                  @Param("store") String store,
                  @Param("stock") String stock,
                  @Param("last_purchase") String last_purchase);
 
     @Modifying
-    @Query(value = "UPDATE gs.grocery_item SET item_name=:item_name, price=:price, store=:store, stock=:stock, last_purchase=CAST(:last_purchase AS timestamp), last_updated=current_timestamp WHERE item_id =:item_id", nativeQuery = true)
+    @Query(value = "UPDATE gs.grocery_item SET item_name=:item_name, item_type=:item_type, price=:price, store=:store, stock=:stock, last_purchase=CAST(:last_purchase AS timestamp), last_updated=current_timestamp WHERE item_id =:item_id", nativeQuery = true)
     void updateItem(@Param("item_name") String item_name,
+                    @Param("item_type") String item_type,
                     @Param("price") int price,
                     @Param("store") String store,
                     @Param("stock") String stock,
-                    @Param("last_purchase") String last_purchase);
+                    @Param("last_purchase") String last_purchase,
+                    @Param("item_id") int item_id);
 
     @Modifying
     @Query(value = "DELETE FROM gs.grocery_item WHERE item_id=:item_id", nativeQuery = true)
     void deleteItem(@Param("item_id") int item_id);
 
-    @Query(value = "SELECT * FROM gs.grocery_item WHERE item_name =:item_name", nativeQuery = true)
+    @Query(value = "SELECT * FROM gs.grocery_item WHERE lower(item_name) =lower(:item_name)", nativeQuery = true)
     List<GroceryItem> getItemByName(@Param("item_name") String item_name);
 
     @Query(value = "SELECT * FROM gs.grocery_item WHERE item_id =:item_id", nativeQuery = true)
@@ -45,21 +48,21 @@ public interface ItemRepository extends JpaRepository<GroceryItem, Integer> {
     @Query(value = "SELECT * FROM gs.grocery_item WHERE store =:store", nativeQuery = true)
     List<GroceryItem> getItemByStore(@Param("store") String store);
 
-    @Query(value = "SELECT * FROM gs.grocery_item WHERE stock =:stock", nativeQuery = true)
+    @Query(value = "SELECT * FROM gs.grocery_item WHERE lower(stock) =lower(:stock)", nativeQuery = true)
     List<GroceryItem> getItemByStock(@Param("stock") String stock);
 
-    @Query(value = "SELECT * FROM gs.grocery_item WHERE last_purchase =:last_purchase", nativeQuery = true)
-    List<GroceryItem> getItemByLastPurchase(@Param("last_purchase") Date last_purchase);
+    @Query(value = "SELECT * FROM gs.grocery_item WHERE CAST(last_purchase AS VARCHAR)=:last_purchase", nativeQuery = true)
+    List<GroceryItem> getItemByLastPurchase(@Param("last_purchase") String last_purchase);
 
-    @Query(value = "SELECT * FROM gs.grocery_item WHERE " +
-            "lower(item_name) like lower(:item_name) AND " +
-            "price like :price AND " +
-            "store like :store AND " +
-            "stock like :stock AND " +
-            "CAST(last_purchase AS VARCHAR) like :last_purchase", nativeQuery = true)
-    List<GroceryItem> getAllItem(@Param("item_name") String item_name,
-                                  @Param("price") int price,
-                                  @Param("store") String store,
-                                  @Param("stock") String stock,
-                                  @Param("last_purchase") String last_purchase);
+//    @Query(value = "SELECT * FROM gs.grocery_item WHERE " +
+//            "lower(item_name) like lower(:item_name) AND " +
+//            "price like :price AND " +
+//            "store like :store AND " +
+//            "stock like :stock AND " +
+//            "CAST(last_purchase AS VARCHAR) like :last_purchase", nativeQuery = true)
+//    List<GroceryItem> getAllItem(@Param("item_name") String item_name,
+//                                  @Param("price") int price,
+//                                  @Param("store") String store,
+//                                  @Param("stock") String stock,
+//                                  @Param("last_purchase") String last_purchase);
 }

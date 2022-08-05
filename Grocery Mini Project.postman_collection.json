@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "200f7b01-f5fd-4728-a29f-0b54293a26a5",
+		"name": "Grocery Mini Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllItem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/items/getAllItem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items",
+						"getAllItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item_name\": \"Egg\",\r\n    \"item_type\": \"primer\",\r\n    \"price\": 26000,\r\n    \"store\": \"Tip Top\",\r\n    \"stock\": \"ada\",\r\n    \"last_purchase\": \"05-08-2022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/items/addItem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items",
+						"addItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getItemByStock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/items/getItemByStock?stock=ada",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items",
+						"getItemByStock"
+					],
+					"query": [
+						{
+							"key": "stock",
+							"value": "ada"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/items/deleteItem?id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items",
+						"deleteItem"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getShoppingList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/priority/getShoppingList?budget=125000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"priority",
+						"getShoppingList"
+					],
+					"query": [
+						{
+							"key": "budget",
+							"value": "125000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item_id\": 10,\r\n    \"item_name\": \"Wafer\",\r\n    \"item_type\": \"\",\r\n    \"price\": 26000,\r\n    \"store\": \"\",\r\n    \"stock\": \"\",\r\n    \"last_purchase\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/items/updateItem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items",
+						"updateItem"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
