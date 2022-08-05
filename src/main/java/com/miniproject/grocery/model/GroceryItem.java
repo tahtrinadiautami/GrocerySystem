@@ -8,16 +8,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "groceryItem", schema ="gs")
+@Table(name = "grocery_item", schema ="gs")
 public class GroceryItem {
     @Id
-    @Column(name = "itemId", columnDefinition = "serial")
+    @Column(name = "item_id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int itemId;
+    private int item_id;
 
     @NotNull
-    @Column(name = "itemName")
-    private String itemName;
+    @Column(name = "item_name")
+    private String item_name;
+
+    @NotNull
+    @Column(name = "item_type")
+    private String item_type;
 
     @NotNull
     @Column(name = "price")
@@ -34,23 +38,37 @@ public class GroceryItem {
     @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Jakarta")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @Column(name = "lastPurchase")
-    private Date lastPurchase;
+    @Column(name = "last_purchase")
+    private String last_purchase;
 
-    public String getItemName() {
-        return itemName;
+    @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Jakarta")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @Column(name = "last_updated")
+    private Date last_updated;
+
+    public int getItem_id() {
+        return item_id;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
     }
 
-    public int getItemId() {
-        return itemId;
+    public String getItem_name() {
+        return item_name;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public String getItem_type() {
+        return item_type;
+    }
+
+    public void setItem_type(String item_type) {
+        this.item_type = item_type;
     }
 
     public int getPrice() {
@@ -77,23 +95,33 @@ public class GroceryItem {
         this.stock = stock;
     }
 
-    public Date getLastPurchase() {
-        return lastPurchase;
+    public String getLast_purchase() {
+        return last_purchase;
     }
 
-    public void setLastPurchase(Date lastPurchase) {
-        this.lastPurchase = lastPurchase;
+    public void setLast_purchase(String last_purchase) {
+        this.last_purchase = last_purchase;
+    }
+
+    public Date getLast_updated() {
+        return last_updated;
+    }
+
+    public void setLast_updated(Date last_updated) {
+        this.last_updated = last_updated;
     }
 
     @Override
     public String toString() {
         return "GroceryItem{" +
-                "itemId=" + itemId +
-                ", itemName='" + itemName + '\'' +
+                "item_id=" + item_id +
+                ", item_name='" + item_name + '\'' +
+                ", item_type='" + item_type + '\'' +
                 ", price=" + price +
                 ", store='" + store + '\'' +
                 ", stock='" + stock + '\'' +
-                ", lastPurchase=" + lastPurchase +
+                ", last_purchase='" + last_purchase + '\'' +
+                ", last_updated=" + last_updated +
                 '}';
     }
 }

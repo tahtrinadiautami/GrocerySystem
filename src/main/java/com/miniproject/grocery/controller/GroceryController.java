@@ -35,14 +35,20 @@ public class GroceryController {
     }
 
     @PostMapping("/deleteItem")
-    public Response<GroceryItem> deleteItem(@RequestBody String input) throws Exception {
-        logger.info("Service deleteItem : "+input);
-        return groceryServices.deleteItem(input);
+    public Response<GroceryItem> deleteItem(@RequestParam int id) throws Exception {
+        logger.info("Service deleteItem : "+id);
+        return groceryServices.deleteItem(id);
     }
 
     @GetMapping("/getAllItem")
     public Response<List<GroceryItem>> getAllItem() throws Exception {
         logger.info("Service getAllItem ");
         return groceryServices.getAllItem();
+    }
+
+    @GetMapping("/getItemByStock")
+    public Response<List<GroceryItem>> getItemByStock(@RequestParam String stock) throws Exception {
+        logger.info("Service getItemByStock : "+stock);
+        return groceryServices.getItemByStock(stock);
     }
 }
